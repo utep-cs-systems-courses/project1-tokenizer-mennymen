@@ -1,51 +1,53 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "history.h"
-
+#include "tokenizer.h"
 
 List* init_history()
 {
   List *list = (List*)malloc(sizeof(List));
-  list-> root = (Item*)malloc(sizeof(Item));
+  list->root = (Item*)malloc(sizeof(Item));
   return list;
 }
 
 
 void add_history(List *list, char *str)
 {
-  //If list is empty
-  Item *currNode = list -> root;
-  if(list->root->id == 0)
-  {
-    list-> root-> str = str;
-    list-> root-> id = 1;
+  int strLen = 0;
+  char *temp = str;
+  while(*temp != '\0'){
+    temp++;
+    strLen++;
   }
-  //If list already has at least one element
-  else
-  {
+  
+  char* strCopy = copy_str(str, strLen);
+  Item *currNode = list->root;
+  
+  if (list->root->id == 0) { /* If list is empty */
+    list->root->str = strCopy;
+    list->root->id = 1;
+    
+  } else {  /* If list already has at least one element */
     int id = 2;
-    while(currNode->next != 0)
-    {
+    while (currNode->next != 0) {
       currNode = currNode->next;
       id++;
     }
-    currNode-> next = malloc(sizeof(Item));
-    currNode-> next-> str = str;
-    currNode-> next-> id = id;
+    currNode->next = malloc(sizeof(Item));
+    currNode->next->str = strCopy;
+    currNode->next->id = id;
   }
 }
 
 
 char *get_history(List *list, int id)
 {
-  Item *tempNode = list-> root;
-  //Iterate through the entire list
-  while(tempNode != NULL)
-  {
-    if(tempNode-> id == id)
-      return tempNode-> str;
+  Item *tempNode = list->root;
+  while(tempNode != NULL) { /* Iterate through the entire list */
+    if(tempNode->id == id)
+      return tempNode->str;
     
-    tempNode = tempNode-> next;
+    tempNode = tempNode->next;
   }
   return "ID not in list";
 }
@@ -53,13 +55,10 @@ char *get_history(List *list, int id)
 
 void print_history(List *list)
 {
-  Item *currNode = list-> root;
-  //Iterate through the entire list
-  while(currNode != NULL)
-  {
-    //Print id and string of current node
-    printf("%d) %s\n", currNode-> id, currNode-> str);
-    currNode = currNode-> next;
+  Item *currNode = list->root;
+  while(currNode != NULL) { /* Iterate through the entire list */
+    printf("%d) %s\n", currNode->id, currNode->str); /* Print id and string of current node */
+    currNode = currNode->next;
   }
 }
 
@@ -67,17 +66,15 @@ void print_history(List *list)
 void free_history(List *list)
 {
   Item *nextNode = list->root;
-  //Iterate through the list to free each node
-  while(nextNode-> next != NULL)
-  {
+  while(nextNode-> next != NULL) { /* Iterate through the list to free each node */
     Item *currNode = nextNode;
-    nextNode = nextNode-> next;
-    //free(currNode-> str);
-    //free(currNode-> next);
+    nextNode = nextNode->next;
+    //free(currNode->str);
+    //free(currNode->next);
     free(currNode);
   }
-  //free(nextNode-> str);
-  //free(nextNode-> next);
+  //free(nextNode->str);
+  //free(nextNode->next);
   free(nextNode);
   //Free the list itself
   free(list);

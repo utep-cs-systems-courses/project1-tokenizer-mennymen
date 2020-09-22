@@ -5,8 +5,7 @@
 
 int space_char(char c)
 {
-  //Return true if c is space or tab but not \0
-  if((c == ' ' || c == '\t') && c != '\0')
+  if ((c == ' ' || c == '\t') && c != '\0') /* Return true if c is space or tab but not \0 */
     return 1;
 
   return 0;
@@ -16,8 +15,7 @@ int space_char(char c)
 
 int non_space_char(char c)
 {
-  //Return true if c is not a space or tab and is not \0
-  if((c != ' ' && c != '\t') && c != '\0')
+  if ((c != ' ' && c != '\t') && c != '\0') /* Return true if c is not a space or tab and is not \0 */
     return 1;
 
   return 0;
@@ -28,8 +26,7 @@ int non_space_char(char c)
 char *word_start(char *str)
 {
   char *new_start = str;
-  //If the current character is a space character, it skips it
-  while(space_char(*new_start))
+  while (space_char(*new_start)) /*If the current character is a space character, it skips it*/
     new_start++;
 
   return new_start;
@@ -40,9 +37,7 @@ char *word_start(char *str)
 char *word_terminator(char *word)
 {
   char *new_end = word;
-  //While the current character is not a space, it keeps moving on to the next one
-  while(non_space_char(*new_end))
-  {
+  while (non_space_char(*new_end)) { /* While the current character is not a space, it keeps moving on to the next one */
     new_end++;
   }
   return new_end;
@@ -54,11 +49,8 @@ int count_words(char *str)
 {
   int count = 0;
   int i = 0;
-  //Iterate through all the characters and counts the spaces
-  while(str[i] != '\0')
-  {
-    if(space_char(str[i]) && non_space_char(str[i+1]))
-    {
+  while (str[i] != '\0'){ /* Iterate through all the characters and counts the spaces */
+    if (space_char(str[i]) && non_space_char(str[i+1])) {
       count++;
     }
     i++;
@@ -72,12 +64,9 @@ int count_words(char *str)
 char *copy_str(char *inStr, short len)
 {
   char *t;
-  int i = 0;
-  //Allocate memory for all the characters of input plus one
-  t = (char*)malloc(sizeof(char)*(len+1));
-  //Copy each character into the new pointer
-  for(; len > i; i++)
-  {
+  int i;
+  t = (char*)malloc(sizeof(char)*(len+1)); /* Allocate memory for all the characters of input plus one */
+  for (i = 0; len > i; i++){ /* Copy each character into the new pointer */
     t[i] = inStr[i];
   }
   t[i] = 0;
@@ -89,12 +78,10 @@ char *copy_str(char *inStr, short len)
 char **tokenize(char *str)
 {
   int num_words = count_words(str);
-  //Allocate memory for all the words to be tokenized
-  char **tokens = (char **) malloc(sizeof(char*)*(num_words+1));
-  for(int i = 0; i < num_words; i++)
-  {
-    //We get the length of each word by getting their start and end
-    tokens[i] = copy_str(str, word_terminator(str) - word_start(str));
+  char **tokens = (char **) malloc(sizeof(char*)*(num_words+1)); /* Allocate memory for all the words to be tokenized */
+  int i;
+  for (i = 0; i < num_words; i++) {
+    tokens[i] = copy_str(str, word_terminator(str) - word_start(str)); /* We get the length of each word by getting their start and end */
     str = word_terminator(str)+1;
   }
   return tokens;
@@ -104,9 +91,7 @@ char **tokenize(char *str)
 
 void print_tokens(char** tokens)
 {
-  //Iterate through each pointer
-  while(*tokens)
-  {
+  while (*tokens) { /* Iterate through each pointer */
     printf("%s\n", *tokens++);
   }
 }
@@ -115,13 +100,10 @@ void print_tokens(char** tokens)
 void free_tokens(char** tokens)
 {
   int i = 0;
-  //Iterate through each pointer to free them
-  while(tokens[i])
-  {
-      free(tokens[i]);
-      i++;
+  while(tokens[i]) { /* Iterate through each pointer to free them */
+    free(tokens[i]);
+    i++;
   }
-  //Then we free the pointer of pointers
-  free(tokens);
+  free(tokens); /* Then we free the pointer of pointers */
 }
 
