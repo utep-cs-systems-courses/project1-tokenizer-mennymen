@@ -20,7 +20,7 @@ int main()
     if (input[0] == '!') {  /*If the first character is '!', it will retrieve the sentence corresponding to the number */
       int value; 
       value = atoi(input+1);  /* Convert input into an int */
-      if (value <= 0) {
+      if (value <= 0) {    /* Handling 0 or negative integers */
 	printf("Invalid input\n");
 
       } else {
