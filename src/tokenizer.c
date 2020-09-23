@@ -77,12 +77,14 @@ char *copy_str(char *inStr, short len)
 
 char **tokenize(char *str)
 {
+  str = word_start(str);
   int num_words = count_words(str);
   char **tokens = (char **) malloc(sizeof(char*)*(num_words+1)); /* Allocate memory for all the words to be tokenized */
   int i;
   for (i = 0; i < num_words; i++) {
     tokens[i] = copy_str(str, word_terminator(str) - word_start(str)); /* We get the length of each word by getting their start and end */
     str = word_terminator(str)+1;
+    str = word_start(str);
   }
   return tokens;
 }

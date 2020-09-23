@@ -69,13 +69,10 @@ void free_history(List *list)
   while(nextNode-> next != NULL) { /* Iterate through the list to free each node */
     Item *currNode = nextNode;
     nextNode = nextNode->next;
-    //free(currNode->str);
-    //free(currNode->next);
-    free(currNode);
+    free(currNode->str);  /* First free the string from the current node */
+    free(currNode);    /* Free the current node */
   }
-  //free(nextNode->str);
-  //free(nextNode->next);
-  free(nextNode);
-  //Free the list itself
-  free(list);
+  free(nextNode->str);  /* Free the string from the last node */
+  free(nextNode);   /* Free the last node */
+  free(list); /* Free the list itself */
 }
