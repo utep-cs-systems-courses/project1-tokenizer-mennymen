@@ -27,7 +27,7 @@ Once the program is running, there are several options for the user to do.
 
 1) Type '@' and press Enter to end the program
 2) Type '$' and press Enter to see all of the sentences tokenized so far
-3) Type '!' and press Enter, then type a number and press Enter to see the
+3) Type '!' followed by a number and press Enter to see the
 sentence that was tokenized in that nominal order. For example '!', then '2'
 will retrieve the second sentence that was tokenized, if any.
 4 Type any sentence that does not start with any of the previous characters to

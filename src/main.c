@@ -12,18 +12,21 @@ int main()
     printf("Welcome, here are your options:\n"); /* Given options to use the UI */
     printf("Input any sentence to tokenize\n");
     printf("Input '$' to see all the sentences you have tokenized\n");
-    printf("Input '!' to retrieve a specific sentence that was tokenized\n");
+    printf("Input '!' followed by a number to retrieve a specific sentence that was tokenized\n");
     printf("Input '@' to quit\n");
     printf("$ ");
     fgets(input, 100, stdin);    /* Get user input */
     
-    if (input[0] == '!') {  /*If the first character is '!', it will ask for a number" */
-      printf("Now input the number of the sentence you want to retrieve\n");
+    if (input[0] == '!') {  /*If the first character is '!', it will retrieve the sentence corresponding to the number */
       int value; 
-      scanf("%d", &value);  /* Get a number from user to retrieve that node from list */
-      printf("Here's your sentence:\n");
-      printf("%s\n", get_history(history, value));  /* Retrieve sentence using get_history */
-      
+      value = atoi(input+1);  /* Convert input into an int */
+      if (value <= 0) {
+	printf("Invalid input\n");
+
+      } else {
+	printf("Here's your sentence:\n");
+	printf("%s\n", get_history(history, value));  /* Retrieve sentence using get_history */    
+      }
       
     } else if(input[0] == '$') { /* If the first character is '$', it will print out the entire history */
       printf("These are the sentences you have tokenized so far:\n");
