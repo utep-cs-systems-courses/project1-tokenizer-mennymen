@@ -24,27 +24,27 @@ int main()
 	printf("Invalid input\n");
 
       } else {
-	printf("Here's your sentence:\n");
-	printf("%s\n", get_history(history, value));  /* Retrieve sentence using get_history */    
+	  printf("Here's your sentence:\n");
+	  printf("%s\n", get_history(history, value));  /* Retrieve sentence using get_history */    
       }
       
-    } else if(input[0] == '$') { /* If the first character is '$', it will print out the entire history */
-      printf("These are the sentences you have tokenized so far:\n");
-      print_history(history);
-      printf("\n");
+    } else if (input[0] == '$') { /* If the first character is '$', it will print out the entire history */
+        printf("These are the sentences you have tokenized so far:\n");
+        print_history(history);
+        printf("\n");
       
     } else if (input[0] == '@') {  /* If the first character is '@', it will end the program */
-      printf("Have a nice day!\n");
-      free_history(history); /* Free history before ending the program */
-      return 0;
+        printf("Have a nice day!\n");
+        free_history(history); /* Free history before ending the program */
+        return 0;
       
     } else { /* If it is anything else, it will tokenize it and print it */
-      char *str = input;
-      add_history(history,str);
-      char **tokens = tokenize(str);
-      printf("Here are your tokens from your input:\n");
-      print_tokens(tokens);
-      free_tokens(tokens); /* Free the tokens */
+        char *str = input;
+        add_history(history,str);
+        char **tokens = tokenize(str);
+        printf("Here are your tokens from your input:\n");
+        print_tokens(tokens);
+        free_tokens(tokens); /* Free the tokens */
     }
   }   
 }

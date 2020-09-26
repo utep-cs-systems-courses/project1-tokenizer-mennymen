@@ -15,12 +15,12 @@ void add_history(List *list, char *str)
 {
   int strLen = 0;
   char *temp = str;
-  while(*temp != '\0'){
+  while (*temp != '\0') {
     temp++;
     strLen++;
   }
   
-  char* strCopy = copy_str(str, strLen);
+  char *strCopy = copy_str(str, strLen);
   Item *currNode = list->root;
   
   if (list->root->id == 0) { /* If list is empty */
@@ -43,8 +43,8 @@ void add_history(List *list, char *str)
 char *get_history(List *list, int id)
 {
   Item *tempNode = list->root;
-  while(tempNode != NULL) { /* Iterate through the entire list */
-    if(tempNode->id == id)
+  while (tempNode != NULL) { /* Iterate through the entire list */
+    if (tempNode->id == id)
       return tempNode->str;
     
     tempNode = tempNode->next;
